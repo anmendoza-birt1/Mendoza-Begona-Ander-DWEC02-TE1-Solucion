@@ -1,4 +1,11 @@
-console.log("Fichero main.js cargado correctamente");
+'use strict'
+
+//Importamos el javascript relacionado con los servicios
+
+import { almacenarGastos } from "./services/gasto.service.js";
+
+almacenarGastos();
+
 
 
 
