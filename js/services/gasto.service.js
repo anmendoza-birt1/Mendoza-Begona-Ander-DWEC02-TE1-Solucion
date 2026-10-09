@@ -13,6 +13,7 @@ var gastoAnual = {
 };
 
 function almacenarGastos() {
+
   //Recorremos el array
   for (let i = 0; i < GASTOS_DB.length; i++) {
     //Extraemos el id primero y despues el valor(hay que parsearlo a cadena)
@@ -21,6 +22,18 @@ function almacenarGastos() {
 
     //Almacenamos los registros en localStorage
     localStorage.setItem(id, value);
+    
+    //Extraemos el año de la fecha
+    let anio = GASTOS_DB[i].date.getFullYear();
+
+    //Añadimos el gastoanual al año al que hacen referencia
+    gastoAnual[anio] += GASTOS_DB[i].precioViaje;
+
+    //Almacenamos los gatos anuales en el sessionStorage, necesitamos un bucle
+    for (let anio in gastoAnual) {
+      //Almacenamos la variable año como id y la variablegastoAnual como valor
+      sessionStorage.setItem(anio, gastoAnual[anio]);
+    } 
   }
 }
 
@@ -28,4 +41,6 @@ function procesarGasto(jsonNuevoGasto){
 
 }
 
-export { almacenarGastos };
+const GastoService = {almacenarGastos};
+
+export { GastoService };

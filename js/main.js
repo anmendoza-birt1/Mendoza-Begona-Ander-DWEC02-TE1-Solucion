@@ -2,11 +2,9 @@
 
 //Importamos el javascript relacionado con los servicios
 
-import { almacenarGastos } from "./services/gasto.service.js";
+import { GastoService } from "./services/gasto.service.js";
 
-almacenarGastos();
-
-
+GastoService.almacenarGastos();
 
 
 
