@@ -35,7 +35,7 @@ const jsonHistorico = `[
 
 const registros = JSON.parse(jsonHistorico);
 
-//Creamos un array
+//Creamos un array con n objetos de la clase GastoCombustible
 const GASTOS_DB = registros.map(
     gasto => new GastoCombustible(
         gasto.id,
@@ -46,3 +46,4 @@ const GASTOS_DB = registros.map(
     )
 );
 
+export {GASTOS_DB};
