@@ -46,4 +46,4 @@ const GASTOS_DB = registros.map(
     )
 );
 
-export {GASTOS_DB};
+export {GASTOS_DB, GastoCombustible};

@@ -1,7 +1,7 @@
 'use strict'
 
 //Se importa el array con objetos de la clase GastoCombustible
-import {GASTOS_DB} from '../data/gasto.data.js';
+import {GASTOS_DB, GastoCombustible} from '../data/gasto.data.js';
 
 var gastoAnual = {
   2020 : 0,
@@ -38,9 +38,32 @@ function almacenarGastos() {
 }
 
 function procesarGasto(jsonNuevoGasto){
+  
+  //Transformamos lo recibo en un objeto JSON
+  const NuevoGastoParseado = JSON.parse(jsonNuevoGasto);
 
+  //Utilizamos la clase GastoCombustible que ahora hemos importado para crear los diferentes objetos que recibiremos
+  let gasto = new GastoCombustible(
+    NuevoGastoParseado.id,
+    NuevoGastoParseado.vehicleType,
+    new Date(NuevoGastoParseado.date),
+    NuevoGastoParseado.kilometres,
+    NuevoGastoParseado.precioViaje
+  );
+  
+  //Extraemos el año del gasto como anteriormente
+  let aniogasto = gasto.date.getFullYear();
+
+  //Obtenemos el gasto del sessionStorage y lo guardamos en una variable, hay que transformarla en un número
+  let gastoAnio = Number(sessionStorage.getItem(aniogasto));
+
+  //Le sumamos a esa variable el valor del viaje recibido
+  gastoAnio += Number(gasto.precioViaje);
+
+  //Actualizamos el valor del gastoAnual en el sessionStorage
+  sessionStorage.setItem(aniogasto, gastoAnio);
 }
 
-const GastoService = {almacenarGastos};
+const GastoService = {almacenarGastos, procesarGasto};
 
 export { GastoService };
