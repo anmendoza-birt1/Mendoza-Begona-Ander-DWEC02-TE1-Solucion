@@ -31,12 +31,18 @@ const jsonHistorico = `[
 ]
 `;
 
-export const GASTOS_DB = registros.map(
+//Parseamos la cadena para transformarla en un objeto JSON
+
+const registros = JSON.parse(jsonHistorico);
+
+//Creamos un array
+const GASTOS_DB = registros.map(
     gasto => new GastoCombustible(
         gasto.id,
         gasto.vehicleType,
-        new Date(gasto.date),
+        new Date(gasto.date),//Se transforma la fecha a date
         gasto.kilometers,
         gasto.precioViaje
     )
 );
+
